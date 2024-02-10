@@ -30,4 +30,8 @@ class StripeServices {
       ),
     );
   }
+
+  Future dispalyPaymentsheet() async {
+    Stripe.instance.presentPaymentSheet();
+  }
 }
