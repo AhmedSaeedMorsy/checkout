@@ -31,7 +31,17 @@ class StripeServices {
     );
   }
 
-  Future dispalyPaymentsheet() async {
+  Future<void> dispalyPaymentsheet() async {
     Stripe.instance.presentPaymentSheet();
+  }
+
+  Future<void> makePayment({
+    required PaymentintentDataInputModel paymentintentDataInputModel,
+  }) async {
+    var paymentIntentModel =
+        await createPaymentIntent(paymentintentDataInputModel);
+    await initPaymentSheet(
+        paymentIntentClientSecret: paymentIntentModel.clientSecret!);
+    await dispalyPaymentsheet();
   }
 }
